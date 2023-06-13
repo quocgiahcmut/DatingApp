@@ -10,9 +10,22 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
+import { MemberListComponent } from './pages/members/member-list/member-list.component';
+import { MemberDetailComponent } from './pages/members/member-detail/member-detail.component';
+import { MessagesComponent } from './pages/messages/messages.component';
+import { ListsComponent } from './pages/lists/lists.component';
 
 @NgModule({
-    declarations: [AppComponent, NavComponent, HomeComponent, RegisterComponent],
+    declarations: [
+        AppComponent,
+        NavComponent,
+        HomeComponent,
+        RegisterComponent,
+        MemberListComponent,
+        MemberDetailComponent,
+        MessagesComponent,
+        ListsComponent,
+    ],
     imports: [
         BrowserAnimationsModule,
         BrowserModule,
