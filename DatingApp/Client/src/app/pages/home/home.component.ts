@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,12 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
     registerMode = false;
+    users: any;
 
-    constructor() {}
+    constructor(private http: HttpClient) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.getUsers();
+    }
+
+    getUsers() {
+        this.http.get('https://localhost:7000/api/users').subscribe({
+            next: (response) => (this.users = response),
+            error: (err) => console.log(err),
+            complete: () => console.log('Request has completed'),
+        });
+    }
 
     registerToggle() {
         this.registerMode = !this.registerMode;
+    }
+
+    cancelRegisterMode(event: boolean) {
+        this.registerMode = event;
     }
 }

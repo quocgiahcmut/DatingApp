@@ -22,7 +22,7 @@ public class AccountController : BaseApiController
 	}
 
 	[HttpPost("register")] // /api/account/register?username=quocgia&password=password
-	public async Task<ActionResult<AppUser>> Register([FromBody] RegisterDto registerDto)
+	public async Task<ActionResult<UserDto>> Register([FromBody] RegisterDto registerDto)
 	{
 		if (await IsUserExistsAsync(registerDto.Username)) return BadRequest("Username is taken");
 
@@ -38,7 +38,11 @@ public class AccountController : BaseApiController
 		_context.Users.Add(user);
 		await _context.SaveChangesAsync();
 
-		return Ok(user);
+		return Ok(new UserDto
+		{
+			Username = user.UserName,
+			Token = _tokenService.CreateToken(user)
+		});
 	}
 
 	[HttpPost("login")]
