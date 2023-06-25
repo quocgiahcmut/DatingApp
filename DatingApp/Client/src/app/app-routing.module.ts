@@ -8,6 +8,8 @@ import { ListsComponent } from './pages/lists/lists.component';
 import { MessagesComponent } from './pages/messages/messages.component';
 import { AuthGuard } from './guards/auth.guard';
 import { TestErrorComponent } from './errors/test-error/test-error.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ServerErrorComponent } from './errors/server-error/server-error.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -23,7 +25,9 @@ const routes: Routes = [
         ],
     },
     { path: 'error', component: TestErrorComponent },
-    { path: '**', component: HomeComponent, pathMatch: 'full' },
+    { path: 'not-found', component: NotFoundComponent },
+    { path: 'server-error', component: ServerErrorComponent },
+    { path: '**', component: NotFoundComponent, pathMatch: 'full' },
 ];
 
 @NgModule({
