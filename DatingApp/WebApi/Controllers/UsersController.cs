@@ -1,36 +1,37 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WebApi.Data;
+using WebApi.DTOs;
 using WebApi.Entities;
+using WebApi.Repositories.User;
 
 namespace WebApi.Controllers;
 
 [Authorize]
 public class UsersController : BaseApiController
 {
-	private readonly ApplicationDbContext _context;
+	private readonly IUserRepository _userRepository;
+	private readonly IMapper _mapper;
 
-	public UsersController(ApplicationDbContext context)
+	public UsersController(IUserRepository userRepository, IMapper mapper)
 	{
-		_context = context;
+		_userRepository = userRepository;
+		_mapper = mapper;
 	}
 
-	[AllowAnonymous]
 	[HttpGet]
-	public async Task<ActionResult<IEnumerable<AppUser>>> GetAllUsers()
+	public async Task<ActionResult<IEnumerable<MemberDto>>> GetAllUsers()
 	{
-		var users = await _context.Users.ToListAsync();
+		var usersToReturn = await _userRepository.GetMembersAsync();
 
-		return Ok(users);
+		return Ok(usersToReturn);
 	}
 
-	[HttpGet("{id}")]
-	public async Task<ActionResult<AppUser>> GetUser(int id)
+	[HttpGet("{username}")]
+	public async Task<ActionResult<MemberDto>> GetUser(string username)
 	{
-		var user = await _context.Users.FindAsync(id);
+		var userToReturn = await _userRepository.GetMemberAsync(username);
 
-		return Ok(user);
+		return userToReturn;
 	}
 }
