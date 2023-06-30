@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -46,8 +46,9 @@ import { PhotoEditorComponent } from './components/members/photo-editor/photo-ed
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        BrowserAnimationsModule,
         FormsModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
         SharedModule,
     ],
     providers: [
