@@ -23,6 +23,8 @@ import { JwtInterceptor } from './interceptor/jwt.interceptor';
 import { MemberEditComponent } from './pages/members/member-edit/member-edit.component';
 import { LoadingInterceptor } from './interceptor/loading.interceptor';
 import { PhotoEditorComponent } from './components/members/photo-editor/photo-editor.component';
+import { TextInputComponent } from './components/forms/text-input/text-input.component';
+import { DatePickerComponent } from './components/forms/date-picker/date-picker.component';
 
 @NgModule({
     declarations: [
@@ -40,6 +42,8 @@ import { PhotoEditorComponent } from './components/members/photo-editor/photo-ed
         MemberCardComponent,
         MemberEditComponent,
         PhotoEditorComponent,
+        TextInputComponent,
+        DatePickerComponent,
     ],
     imports: [
         BrowserAnimationsModule,

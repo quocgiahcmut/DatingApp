@@ -5,6 +5,7 @@ using System.Security.Claims;
 using WebApi.DTOs;
 using WebApi.Entities;
 using WebApi.Extensions;
+using WebApi.Helpers;
 using WebApi.Repositories.User;
 using WebApi.Services.Photo;
 
@@ -27,11 +28,16 @@ public class UsersController : BaseApiController
 	}
 
 	[HttpGet]
-	public async Task<ActionResult<IEnumerable<MemberDto>>> GetAllUsers()
+	public async Task<ActionResult<PagedList<MemberDto>>> GetAllUsers([FromQuery]UserParams userParams)
 	{
-		var usersToReturn = await _userRepository.GetMembersAsync();
+		var users = await _userRepository.GetMembersAsync(userParams);
 
-		return Ok(usersToReturn);
+		Response.AddPaginationHeader(new PaginationHeader(users.CurrnetPage,
+                                                    users.PageSize,
+                                                    users.TotalCount,
+                                                    users.TotalPages));
+
+		return Ok(users);
 	}
 
 	[HttpGet("{username}")]
