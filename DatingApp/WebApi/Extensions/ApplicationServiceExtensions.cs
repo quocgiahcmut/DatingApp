@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebApi.Data;
 using WebApi.Helpers;
+using WebApi.Repositories.LIke;
 using WebApi.Repositories.User;
 using WebApi.Services.Photo;
 using WebApi.Services.Token;
@@ -18,6 +19,7 @@ public static class ApplicationServiceExtensions
         services.AddCors();
 
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<ILikeRepository, LikeRepository>();
 
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IPhotoService, PhotoService>();
