@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "DatingApp/WebApi"
+		},
+		{
+			"path": "DatingApp/Client"
+		}
+	],
+	"settings": {}
+}
