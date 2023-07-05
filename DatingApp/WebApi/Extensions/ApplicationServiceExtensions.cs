@@ -9,23 +9,25 @@ namespace WebApi.Extensions;
 
 public static class ApplicationServiceExtensions
 {
-	public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
-	{
-		services.AddDbContext<ApplicationDbContext>(opt =>
-		{
-			opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
-		});
-		services.AddCors();
+    public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
+    {
+        services.AddDbContext<ApplicationDbContext>(opt =>
+        {
+            opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
+        });
+        services.AddCors();
 
-		services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
 
-		services.AddScoped<ITokenService, TokenService>();
-		services.AddScoped<IPhotoService, PhotoService>();
+        services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<IPhotoService, PhotoService>();
 
-		services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+        services.AddScoped<LogUserActivity>();
 
-		services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-		return services;
-	}
+        services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+
+        return services;
+    }
 }
