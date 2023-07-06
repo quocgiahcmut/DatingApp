@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Reflection.Metadata;
+﻿using System.Reflection.Metadata;
+using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs;
 using WebApi.Entities;
 using WebApi.Extensions;
+using WebApi.Helpers;
 using WebApi.Repositories.LIke;
 using WebApi.Repositories.User;
 
@@ -48,9 +49,16 @@ public class LikesController : BaseApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<LikeDto>>> GetUserLikes(string predicate)
+    public async Task<ActionResult<PagedList<LikeDto>>> GetUserLikes([FromQuery] LikesParams likesParams)
     {
-        var users = await _likeRepository.GetUserLikes(predicate, User.GetUserId());
+        likesParams.UserId = User.GetUserId();
+
+        var users = await _likeRepository.GetUserLikes(likesParams);
+
+        Response.AddPaginationHeader(new PaginationHeader(users.CurrnetPage,
+                                                          users.PageSize,
+                                                          users.TotalCount,
+                                                          users.TotalPages));
 
         return Ok(users);
     }
