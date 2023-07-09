@@ -7,7 +7,7 @@ using WebApi.Entities;
 using WebApi.Extensions;
 using WebApi.Helpers;
 
-namespace WebApi.Repositories.User;
+namespace WebApi.Repositories.UserRepository;
 
 public class UserRepository : IUserRepository
 {

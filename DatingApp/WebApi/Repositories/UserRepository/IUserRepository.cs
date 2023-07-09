@@ -3,7 +3,7 @@ using WebApi.Entities;
 using WebApi.Extensions;
 using WebApi.Helpers;
 
-namespace WebApi.Repositories.User;
+namespace WebApi.Repositories.UserRepository;
 
 public interface IUserRepository
 {
@@ -12,6 +12,6 @@ public interface IUserRepository
     Task<IEnumerable<AppUser>> GetUsersAsync();
     Task<AppUser> GetUserByIdAsync(int id);
     Task<AppUser> GetUserByUsernameAsync(string username);
-    Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams); 
+    Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams);
     Task<MemberDto> GetMemberAsync(string username);
 }

@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebApi.Data;
 using WebApi.Helpers;
-using WebApi.Repositories.LIke;
-using WebApi.Repositories.User;
+using WebApi.Repositories.LikeRepository;
+using WebApi.Repositories.MessageRepository;
+using WebApi.Repositories.UserRepository;
 using WebApi.Services.Photo;
 using WebApi.Services.Token;
 
@@ -20,6 +21,7 @@ public static class ApplicationServiceExtensions
 
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<ILikeRepository, LikeRepository>();
+        services.AddScoped<IMessageRepository, MessageRepository>();
 
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IPhotoService, PhotoService>();

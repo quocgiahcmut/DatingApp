@@ -5,7 +5,7 @@ using WebApi.Entities;
 using WebApi.Extensions;
 using WebApi.Helpers;
 
-namespace WebApi.Repositories.LIke;
+namespace WebApi.Repositories.LikeRepository;
 
 public class LikeRepository : ILikeRepository
 {

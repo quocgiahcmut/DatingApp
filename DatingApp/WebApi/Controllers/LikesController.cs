@@ -4,8 +4,8 @@ using WebApi.DTOs;
 using WebApi.Entities;
 using WebApi.Extensions;
 using WebApi.Helpers;
-using WebApi.Repositories.LIke;
-using WebApi.Repositories.User;
+using WebApi.Repositories.LikeRepository;
+using WebApi.Repositories.UserRepository;
 
 namespace WebApi.Controllers;
 

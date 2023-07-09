@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using WebApi.Extensions;
-using WebApi.Repositories.User;
+using WebApi.Repositories.UserRepository;
 
 namespace WebApi.Helpers;
 
