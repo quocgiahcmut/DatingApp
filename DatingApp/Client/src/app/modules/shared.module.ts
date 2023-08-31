@@ -12,35 +12,35 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { TimeagoModule } from 'ngx-timeago';
 
 @NgModule({
-    declarations: [],
-    imports: [
-        CommonModule,
-        BsDropdownModule.forRoot(),
-        TabsModule.forRoot(),
-        ToastrModule.forRoot({
-            positionClass: 'toast-bottom-right',
-        }),
-        NgxGalleryModule,
-        NgxSpinnerModule.forRoot({
-            type: 'square-jelly-box',
-        }),
-        FileUploadModule,
-        BsDatepickerModule.forRoot(),
-        PaginationModule.forRoot(),
-        ButtonsModule.forRoot(),
-        TimeagoModule.forRoot(),
-    ],
-    exports: [
-        BsDropdownModule,
-        ToastrModule,
-        TabsModule,
-        NgxGalleryModule,
-        NgxSpinnerModule,
-        FileUploadModule,
-        BsDatepickerModule,
-        PaginationModule,
-        ButtonsModule,
-        TimeagoModule,
-    ],
+  declarations: [],
+  imports: [
+    CommonModule,
+    BsDropdownModule.forRoot(),
+    TabsModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+    }),
+    NgxGalleryModule,
+    NgxSpinnerModule.forRoot({
+      type: 'square-jelly-box',
+    }),
+    FileUploadModule,
+    BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot(),
+    ButtonsModule.forRoot(),
+    TimeagoModule.forRoot(),
+  ],
+  exports: [
+    BsDropdownModule,
+    ToastrModule,
+    TabsModule,
+    NgxGalleryModule,
+    NgxSpinnerModule,
+    FileUploadModule,
+    BsDatepickerModule,
+    PaginationModule,
+    ButtonsModule,
+    TimeagoModule,
+  ],
 })
 export class SharedModule {}
