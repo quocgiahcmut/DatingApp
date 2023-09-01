@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WebApi.Data;
+using WebApi.Entities;
 using WebApi.Extensions;
 using WebApi.Middleware;
 using WebApi.Services.Token;
@@ -28,18 +30,19 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-/*using var scope = app.Services.CreateScope();
+using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 try
 {
 	var context = services.GetRequiredService<ApplicationDbContext>();
+	var userManager = services.GetRequiredService<UserManager<AppUser>>();
 	await context.Database.MigrateAsync();
-	await SeedData.SeedUsers(context);
+	await SeedData.SeedUsers(userManager);
 }
 catch (Exception ex)
 {
 	var logger = services.GetService<ILogger<Program>>();
 	logger.LogError(ex, "An error occurred during migration");
-}*/
+}
 
 app.Run();
