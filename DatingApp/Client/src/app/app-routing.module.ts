@@ -12,6 +12,7 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { MemberEditComponent } from './pages/members/member-edit/member-edit.component';
 import { PreventUnsavedChangesGuard } from './guards/prevent-unsaved-changes.guard';
+import { MemberDetailedResolver } from './resolvers/member-detailed.resolver';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,8 +21,8 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
-      { path: 'members', component: MemberListComponent },
-      { path: 'members/:username', component: MemberDetailComponent },
+      { path: 'members', component: MemberListComponent},
+      { path: 'members/:username', component: MemberDetailComponent, resolve: { member: MemberDetailedResolver }},
       {
         path: 'member/edit',
         component: MemberEditComponent,
