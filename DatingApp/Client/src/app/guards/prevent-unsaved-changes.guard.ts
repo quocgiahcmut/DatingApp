@@ -6,7 +6,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { MemberEditComponent } from '../pages/members/member-edit/member-edit.component';
+import { MemberEditComponent } from '~/pages/members/member-edit/member-edit.component'
 
 @Injectable({
   providedIn: 'root',

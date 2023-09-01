@@ -1,12 +1,12 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Member } from '../models/member';
+import { Member } from '~/models/member';
 import { of, map, take } from 'rxjs';
-import { PaginatedResult } from '../models/pagination';
-import { UserParams } from '../models/userParams';
+import { PaginatedResult } from '~/models/pagination';
+import { UserParams } from '~/models/userParams';
 import { AccountService } from './account.service';
-import { User } from '../models/user';
+import { User } from '~/models/user';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
 
 @Injectable({
