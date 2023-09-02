@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
@@ -14,12 +15,13 @@ namespace WebApi.Controllers;
 public class AccountController : BaseApiController
 {
 	private readonly ApplicationDbContext _context;
+	private readonly UserManager<AppUser> _userManager;
 	private readonly ITokenService _tokenService;
     private readonly IMapper _mapper;
 
-    public AccountController(ApplicationDbContext context, ITokenService tokenService, IMapper mapper)
+    public AccountController(UserManager<AppUser> userManager, ITokenService tokenService, IMapper mapper)
 	{
-		_context = context;
+		_userManager = userManager;
 		_tokenService = tokenService;
         _mapper = mapper;
     }
@@ -33,14 +35,18 @@ public class AccountController : BaseApiController
 
 		user.UserName = registerDto.Username.ToLower();
 
-		_context.Users.Add(user);
-		await _context.SaveChangesAsync();
+		var userResult = await _userManager.CreateAsync(user, registerDto.Password);
+
+		if (!userResult.Succeeded) return BadRequest(userResult.Errors);
+
+		var roleResult = await _userManager.AddToRoleAsync(user, "Member");
+
+		if (!roleResult.Succeeded) return BadRequest(roleResult.Errors);
 
 		return Ok(new UserDto
 		{
 			Username = user.UserName,
-			Token = _tokenService.CreateToken(user),
-			PhotoUrl = user.Photos.FirstOrDefault(p => p.IsMain)?.Url,
+			Token = await _tokenService.CreateToken(user),
 			KnownAs = user.KnownAs,
 			Gender = user.Gender
 		});
@@ -49,18 +55,20 @@ public class AccountController : BaseApiController
 	[HttpPost("login")]
 	public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
 	{
-		var user = await _context.Users
+		var user = await _userManager.Users
 			.Include(p => p.Photos)
 			.SingleOrDefaultAsync(u => u.UserName == loginDto.Username);
 
 		if (user is null) return Unauthorized("Invalid username");
 
+		var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
 
+		if (!result) return Unauthorized("Invalid Password");
 
 		return Ok(new UserDto
 		{
 			Username = user.UserName,
-			Token = _tokenService.CreateToken(user),
+			Token = await _tokenService.CreateToken(user),
 			PhotoUrl = user.Photos.FirstOrDefault(p => p.IsMain)?.Url,
 			KnownAs = user.KnownAs,
 			Gender = user.Gender
@@ -69,6 +77,6 @@ public class AccountController : BaseApiController
 
 	private async Task<bool> IsUserExistsAsync(string username)
 	{
-		return await _context.Users.AnyAsync(au => au.UserName == username.ToLower());
+		return await _userManager.Users.AnyAsync(au => au.UserName == username.ToLower());
 	}
 }

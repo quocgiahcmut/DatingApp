@@ -23,7 +23,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.UseMiddleware<ExceptionMiddleware>();
 
-app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -36,8 +36,9 @@ try
 {
 	var context = services.GetRequiredService<ApplicationDbContext>();
 	var userManager = services.GetRequiredService<UserManager<AppUser>>();
+	var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
 	await context.Database.MigrateAsync();
-	await SeedData.SeedUsers(userManager);
+	await SeedData.SeedUsers(userManager, roleManager);
 }
 catch (Exception ex)
 {
