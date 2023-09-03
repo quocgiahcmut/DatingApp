@@ -14,7 +14,6 @@ namespace WebApi.Controllers;
 
 public class AccountController : BaseApiController
 {
-	private readonly ApplicationDbContext _context;
 	private readonly UserManager<AppUser> _userManager;
 	private readonly ITokenService _tokenService;
     private readonly IMapper _mapper;
