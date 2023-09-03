@@ -3,6 +3,7 @@ using WebApi.Data;
 using WebApi.Helpers;
 using WebApi.Repositories.LikeRepository;
 using WebApi.Repositories.MessageRepository;
+using WebApi.Repositories.UnitOfWork;
 using WebApi.Repositories.UserRepository;
 using WebApi.Services.Photo;
 using WebApi.Services.Token;
@@ -22,11 +23,12 @@ public static class ApplicationServiceExtensions
         services.AddSignalR();
 
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-        services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped<ILikeRepository, LikeRepository>();
-        services.AddScoped<IMessageRepository, MessageRepository>();
+        
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IPhotoService, PhotoService>();
+
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+
         services.AddScoped<LogUserActivity>();
         services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
         services.AddSingleton<PresenceTracker>();
