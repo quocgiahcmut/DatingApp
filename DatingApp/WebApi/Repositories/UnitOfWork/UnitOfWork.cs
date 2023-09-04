@@ -2,6 +2,7 @@
 using WebApi.Data;
 using WebApi.Repositories.LikeRepository;
 using WebApi.Repositories.MessageRepository;
+using WebApi.Repositories.PhotoRepo;
 using WebApi.Repositories.UserRepository;
 
 using LikeRepo = WebApi.Repositories.LikeRepository;
@@ -26,6 +27,8 @@ public class UnitOfWork : IUnitOfWork
     public IMessageRepository MessageRepository => new MessageRepo.MessageRepository(_context, _mapper);
 
     public ILikeRepository LikeRepository => new LikeRepo.LikeRepository(_context);
+
+    public IPhotoRepository PhotoRepository => new PhotoRepository(_context);
 
     public async Task<bool> Complete()
     {

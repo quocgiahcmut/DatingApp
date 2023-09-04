@@ -34,7 +34,8 @@ public class SeedData
 
         foreach (var user in users)
 		{
-			user.UserName = user.UserName.ToLower();
+            user.Photos.First().IsApproved = true;
+            user.UserName = user.UserName.ToLower();
 
 			await userManager.CreateAsync(user, "Abc123!!!");
 			await userManager.AddToRoleAsync(user, "Member");
