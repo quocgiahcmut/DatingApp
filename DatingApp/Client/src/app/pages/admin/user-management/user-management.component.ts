@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { User } from '~/models/user';
 import { AdminService } from '~/services/admin.service';
-import { RolesModalComponent } from '~/pages/admin/modals/roles-modal/roles-modal.component';
+import { RolesModalComponent } from '~/components/modals/roles-modal/roles-modal.component';
 
 @Component({
   selector: 'app-user-management',

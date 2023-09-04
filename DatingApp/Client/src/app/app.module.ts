@@ -30,7 +30,7 @@ import { AdminPanelComponent } from '~/pages/admin/admin-panel/admin-panel.compo
 import { HasRoleDirective } from '~/directives/has-role.directive';
 import { UserManagementComponent } from '~/pages/admin/user-management/user-management.component';
 import { PhotoManagementComponent } from '~/pages/admin/photo-management/photo-management.component';
-import { RolesModalComponent } from '~/pages/admin/modals/roles-modal/roles-modal.component';
+import { RolesModalComponent } from '~/components/modals/roles-modal/roles-modal.component';
 
 @NgModule({
   declarations: [

@@ -13,22 +13,23 @@ import { User } from '~/models/user';
 })
 export class NavComponent implements OnInit {
   model: any = {};
-  currentUser$: Observable<User | null> = of(null);
 
   constructor(
-    private accountService: AccountService,
+    public accountService: AccountService,
     private router: Router,
     private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
-    this.currentUser$ = this.accountService.currentUser$;
+
   }
 
   login() {
     this.accountService.login(this.model).subscribe({
-      next: (_) => this.router.navigateByUrl('/members'),
-      error: (err) => this.toastr.error(err.error),
+      next: (_) => {
+        this.router.navigateByUrl('/members')
+        this.model = {}
+      }
     });
   }
 
